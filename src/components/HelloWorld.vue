@@ -36,7 +36,7 @@ export default {
     return {
       filters: {
         formatPrice: function (price) {
-          return `${price.toLocaleString('pl-PL')} PLN`
+          return `${price.toLocaleString('pl-PL')} zł`
         }
       },
       msg: 'vue.js app',
@@ -50,7 +50,7 @@ const getProduct = () => {
     id: 1,
     title: 'Paczka ziemniaków',
     description: 'ziemniaczki',
-    price: 10.123123,
+    price: 10123123,
     image: require('./../assets/potato2.jpg')
   }
   return obj
