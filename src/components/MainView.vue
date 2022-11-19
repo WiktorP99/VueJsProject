@@ -3,7 +3,7 @@
   <head>
     <title>Vue</title>
     <link rel="stylesheet"
-    href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
     crossorigin="anonymous">
   </head>
   <body>
@@ -30,31 +30,27 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'MainView',
   data () {
     let product = getProduct()
     return {
-      filters: {
-        formatPrice: function (price) {
-          console.log(price)
-          let fulls = price.toString().slice(0, -2)
-          let pennies = price.toString().slice(-2)
-          let currency = 'zł'
-          return fulls + '.' + pennies + ' ' + currency
-        }
-      },
       msg: 'vue.js app',
       product: product
+    }
+  },
+  filters: {
+    formatPrice: function (price) {
+      return `${price.toLocaleString('pl-PL')} zł`
     }
   }
 }
 
 const getProduct = () => {
   let obj = {
-    id: 1,
-    title: 'Paczka ziemniaków',
-    description: 'ziemniaczki',
-    price: 1200,
+    id: 1001,
+    title: 'Worek ziemniaków 10kg',
+    description: '10-kilogramowe opakowanie pysznych ziemniaków.',
+    price: 1000,
     image: require('./../assets/potato2.jpg')
   }
   return obj
