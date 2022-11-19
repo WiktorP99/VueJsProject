@@ -19,7 +19,7 @@
             <div class="col col-expand">
               <h1 v-text="product.title"></h1>
               <p v-text="product.description"></p>
-              <p class="price">{{product.price | formatPrice}}</p>
+              <p class="price">{{product.price | filters.formatPrice(product.price)}}</p>
             </div>
           </div>
         </main>
@@ -36,7 +36,11 @@ export default {
     return {
       filters: {
         formatPrice: function (price) {
-          return `${price.toLocaleString('pl-PL')} zł`
+          console.log(price)
+          let fulls = price.toString().slice(0, -2)
+          let pennies = price.toString().slice(-2)
+          let currency = 'zł'
+          return fulls + '.' + pennies + ' ' + currency
         }
       },
       msg: 'vue.js app',
@@ -50,7 +54,7 @@ const getProduct = () => {
     id: 1,
     title: 'Paczka ziemniaków',
     description: 'ziemniaczki',
-    price: 10123123,
+    price: 1200,
     image: require('./../assets/potato2.jpg')
   }
   return obj
