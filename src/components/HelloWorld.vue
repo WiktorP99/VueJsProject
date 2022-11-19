@@ -36,7 +36,6 @@ export default {
     return {
       filters: {
         formatPrice: function (price) {
-          console.log(price)
           return `${price.toLocaleString('pl-PL')} PLN`
         }
       },
