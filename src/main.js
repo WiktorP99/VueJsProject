@@ -11,14 +11,5 @@ new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>',
-  cart: [],
-  methods: {
-    addToCart: () => {
-      this.cart.push(this.product.id)
-    },
-    getCartCount: () => {
-      return this.cart.length() || ''
-    }
-  }
+  template: '<App/>'
 })

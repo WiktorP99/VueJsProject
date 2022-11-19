@@ -10,11 +10,8 @@
       <div id="app">
         <main>
           <header>
-            <div class="navbar navbar-default">
-              <h1>xyz</h1>
-            </div>
             <div class="nav navbar-nav navbar-right cart">
-              <span class="glyphicon glyphicon-shopping-cart">{{getCartCount}}</span>
+              <span class="glyphicon glyphicon-shopping-cart">{{cartItemCount}}</span>
             </div>
           </header>
           <div class="row product">
@@ -28,7 +25,8 @@
               <h1 v-text="product.title"></h1>
               <p v-text="product.description"></p>
               <p class="price">{{product.price | formatPrice}}</p>
-              <button v-on:click="addProduct()" style="width:200px;height:50px">dodaj do koszyka</button>
+              <button v-on:click="addProduct" class="btn" v-if="canAddToCart">Dodaj do koszyka</button>
+              <button class="btn--disabled" v-else>Dodajdokoszyka </button>
             </div>
           </div>
         </main>
@@ -44,25 +42,40 @@ export default {
     let product = getProduct()
     return {
       msg: 'vue.js app',
-      product: product
+      product: product,
+      cart: []
     }
   },
   filters: {
     formatPrice: function (price) {
       return `${price.toLocaleString('pl-PL')} zł`
     }
+  },
+  methods: {
+    addProduct: function () {
+      return this.cart.push(this.product.id)
+    }
+  },
+  computed: {
+    cartItemCount: function () {
+      return this.cart.length || ''
+    },
+    canAddToCart: function () {
+      return this.product.availableInventory > this.cartItemCount
+    }
   }
 }
 
 const getProduct = () => {
-  let obj = {
+  let product = {
     id: 1001,
     title: 'Worek ziemniaków 10kg',
     description: '10-kilogramowe opakowanie pysznych ziemniaków.',
     price: 1000,
-    image: require('./../assets/potato2.jpg')
+    image: require('./../assets/potato2.jpg'),
+    availableInventory: 5
   }
-  return obj
+  return product
 }
 </script>
 
@@ -81,5 +94,9 @@ li {
 }
 a {
   color: #42b983;
+}
+.btn {
+  width:200px;
+  height:50px;
 }
 </style>
