@@ -14,7 +14,7 @@
               <h1>xyz</h1>
             </div>
             <div class="nav navbar-nav navbar-right cart">
-              <span class="glyphicon glyphicon-shopping-cart" v-text="getCartCount()"></span>
+              <span class="glyphicon glyphicon-shopping-cart">{{getCartCount}}</span>
             </div>
           </header>
           <div class="row product">
@@ -28,7 +28,7 @@
               <h1 v-text="product.title"></h1>
               <p v-text="product.description"></p>
               <p class="price">{{product.price | formatPrice}}</p>
-              <button v-on:click="addProduct()" style="width:200px"></button>
+              <button v-on:click="addProduct()" style="width:200px;height:50px">dodaj do koszyka</button>
             </div>
           </div>
         </main>
@@ -52,14 +52,7 @@ export default {
         }
       },
       msg: 'vue.js app',
-      product: product,
-      cart: [],
-      addToCart: () => {
-        this.cart.push(this.product.id)
-      },
-      getCartCount: () => {
-        return this.cart.length() || ''
-      }
+      product: product
     }
   }
 }
