@@ -19,7 +19,7 @@
             <div class="col col-expand">
               <h1 v-text="product.title"></h1>
               <p v-text="product.description"></p>
-              <p class="price">{{product.price | filters.formatPrice(product.price)}}</p>
+              <p class="price">{{product.price | formatPrice}}</p>
             </div>
           </div>
         </main>
