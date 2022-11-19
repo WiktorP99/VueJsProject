@@ -19,7 +19,7 @@
             <div class="col col-expand">
               <h1 v-text="product.title"></h1>
               <p v-text="product.description"></p>
-              <p v-text="product.price" class="price"></p>
+              <p class="price">{{product.price | formatPrice}}</p>
             </div>
           </div>
         </main>
@@ -32,26 +32,27 @@
 export default {
   name: 'HelloWorld',
   data () {
-    var product = getProuct()
+    let product = getProduct()
     return {
       filters: {
-        formatPrice: function(price) {
-          
+        formatPrice: function (price) {
+          console.log(price)
+          return `${price.toLocaleString('pl-PL')} PLN`
         }
       },
-      msg: 'Welcome to Your Vue.js App',
+      msg: 'vue.js app',
       product: product
     }
   }
 }
 
-const getProuct = () => {
-  var obj = {
-    id: 1001,
-    title: 'Worek ziemniaków',
-    description: '10-kilogramoweopakowaniepysznychziemniaków',
-    price: 1000,
-    image: require('C://STUDIA/projekt1/src/assets/potato2.jpg')
+const getProduct = () => {
+  let obj = {
+    id: 1,
+    title: 'Paczka ziemniaków',
+    description: 'ziemniaczki',
+    price: 10.123123,
+    image: require('./../assets/potato2.jpg')
   }
   return obj
 }
