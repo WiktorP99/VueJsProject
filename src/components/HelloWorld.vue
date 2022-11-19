@@ -9,6 +9,14 @@
   <body>
       <div id="app">
         <main>
+          <header>
+            <div class="navbar navbar-default">
+              <h1>xyz</h1>
+            </div>
+            <div class="nav navbar-nav navbar-right cart">
+              <span class="glyphicon glyphicon-shopping-cart" v-text="getCartCount()"></span>
+            </div>
+          </header>
           <div class="row product">
             <div>
               <figure>
@@ -20,6 +28,7 @@
               <h1 v-text="product.title"></h1>
               <p v-text="product.description"></p>
               <p class="price">{{product.price | formatPrice}}</p>
+              <button v-on:click="addProduct()" style="width:200px"></button>
             </div>
           </div>
         </main>
@@ -36,7 +45,6 @@ export default {
     return {
       filters: {
         formatPrice: function (price) {
-          console.log(price)
           let fulls = price.toString().slice(0, -2)
           let pennies = price.toString().slice(-2)
           let currency = 'zł'
@@ -44,7 +52,14 @@ export default {
         }
       },
       msg: 'vue.js app',
-      product: product
+      product: product,
+      cart: [],
+      addToCart: () => {
+        this.cart.push(this.product.id)
+      },
+      getCartCount: () => {
+        return this.cart.length() || ''
+      }
     }
   }
 }
